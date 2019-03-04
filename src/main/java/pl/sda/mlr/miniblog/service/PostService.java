@@ -1,7 +1,9 @@
 package pl.sda.mlr.miniblog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import pl.sda.mlr.miniblog.api.PostSummary;
 import pl.sda.mlr.miniblog.entity.Comment;
 import pl.sda.mlr.miniblog.entity.Post;
 import pl.sda.mlr.miniblog.entity.User;

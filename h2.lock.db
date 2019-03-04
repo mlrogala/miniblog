@@ -1,6 +1,6 @@
 #FileLock
-#Mon Mar 04 13:13:09 CET 2019
+#Mon Mar 04 13:37:26 CET 2019
 hostName=LAPTOP-36SKAH06
-id=169489f34534ba8f1d58a65fa74b475c0bec50cc1b6
+id=16948b5708f96baafaf20173054007ad3af14e540cb
 method=file
-server=10.10.15.21\:56875
+server=10.10.15.21\:58359

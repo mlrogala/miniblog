@@ -3,11 +3,14 @@ package pl.sda.mlr.miniblog.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.sda.mlr.miniblog.entity.Post;
 import pl.sda.mlr.miniblog.service.PostService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,6 +30,12 @@ public class ApiPostController {
                 .map(post -> new PostSummary(post.getId(), post.getTitle()))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(postSummaryList);
+    }
+
+    @GetMapping("/post/{id}")
+    public ResponseEntity<Post> getPostDetails(@PathVariable String id){
+        Optional<Post> postOptional= postService.getSinglePost(Long.valueOf(id));
+            return ResponseEntity.of(postOptional);
     }
 
 }
