@@ -13,6 +13,7 @@ import pl.sda.mlr.miniblog.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -56,6 +57,10 @@ public class PostService {
 
     public List<Post> getAllPosts() {
         return postRepository.findAll();
+    }
+
+    public List<Comment> getAllComments (Long postId){
+        return commentRepository.findCommentsByPostId(postId).stream().sorted((o1, o2) -> o2.getAdded().compareTo(o1.getAdded())).collect(Collectors.toList());
     }
 
     public void addNewComment(Long postId, String userLogin, String commentBody) {

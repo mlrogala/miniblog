@@ -17,6 +17,13 @@
         <input type="submit" value="Dodaj komentarz">
     </form>
 </div>
+<br>
+<h3>Komentarze:</h3>
+<div th:each="comment : ${showAllComments}">
+    <h4 th:text="${comment.commentBody}">Treść komentarza</h4>
+    <span th:text="${#temporals.format(comment.added,'yyyy-MM-dd HH:mm')}">2019-03-02 11:07:10</span>
+
+</div>
 
 
 </body>

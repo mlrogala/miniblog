@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.mlr.miniblog.entity.Comment;
 import pl.sda.mlr.miniblog.entity.Post;
 import pl.sda.mlr.miniblog.form.NewPostForm;
 import pl.sda.mlr.miniblog.service.PostService;
@@ -47,16 +48,16 @@ public class PostController {
 
     @GetMapping("/post")
 //    public String showSinglePost(@RequestParam Long postId){
-    public String showSinglePost(@RequestParam String postId, Model model){
+    public String showSinglePost(@RequestParam String postId, Model model, Model modelForComments){
 
-        return prepareSinglePost(postId, model);
+        return prepareSinglePost(postId, model, modelForComments);
     }
 
     @GetMapping("/post/{postName},{postId}")
 //    @GetMapping("/post/{postId}")
-    public String showSinglePostByPath(@PathVariable String postId, Model model){
+    public String showSinglePostByPath(@PathVariable String postId, Model model, Model modelForComments){
 
-        return prepareSinglePost(postId, model);
+        return prepareSinglePost(postId, model, modelForComments);
     }
 
     @GetMapping("/posts")
@@ -68,7 +69,6 @@ public class PostController {
         return "post/showPosts";
     }
 
-
     @PostMapping("/post/{id}/comment/add")
     public String handleNewCommentForm(
             @PathVariable String id,
@@ -79,10 +79,7 @@ public class PostController {
         return "redirect:/post/," + postId;
     }
 
-
-
-
-    private String prepareSinglePost(@RequestParam String postId, Model model) {
+    private String prepareSinglePost(@RequestParam String postId, Model model, Model modelForComments) {
         Long postIdLong;
         try {
             postIdLong = Long.parseLong(postId);
@@ -101,6 +98,10 @@ public class PostController {
         }
 
         model.addAttribute("post", postOptional.get());
+
+        List<Comment> comments = postService.getAllComments(Long.valueOf(postId));
+        modelForComments.addAttribute("showAllComments", comments);
+
         return "post/showSinglePost";
     }
 }
