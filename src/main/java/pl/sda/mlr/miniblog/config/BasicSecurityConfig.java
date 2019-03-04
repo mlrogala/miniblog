@@ -26,6 +26,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/post/add").hasAnyAuthority("ROLE_ADMIN")
+//                .antMatchers("/users").hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers("/post/*/comment/add").hasAnyRole("USER", "ADMIN")
                 .anyRequest().permitAll()
                 .and()

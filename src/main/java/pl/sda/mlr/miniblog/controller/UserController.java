@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.sda.mlr.miniblog.entity.User;
 import pl.sda.mlr.miniblog.form.UserRegisterForm;
 import pl.sda.mlr.miniblog.service.UserService;
 import pl.sda.mlr.miniblog.service.UserSessionService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -76,6 +78,17 @@ public class UserController {
     public String logoutForm(){
         userSessionService.logout();
         return "user/logoutForm";
+    }
+
+    //TODO: show user's roles
+
+    @GetMapping("/users")
+    public String showAllPosts(Model model){
+        List<User> allUsers = userService.getAllUsers();
+
+        model.addAttribute("users", allUsers);
+
+        return "user/showUsers";
     }
 }
 

@@ -11,6 +11,7 @@ import pl.sda.mlr.miniblog.repository.RoleRepository;
 import pl.sda.mlr.miniblog.repository.UserRepository;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -52,6 +53,10 @@ public class UserService {
 //        roles.add(role);
 //        user.setRoles(roles);
         user.addRole(role);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
 
