@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="~{includes/stylesAndScripts :: head}"></th:block>
+</head>
+<body>
+<h1>Witaj na mojej stronie!</h1>
+
+<p>Zalogowany: <span th:text="${userLogged}"></span></p>
+
+<form method="get" th:action="@{/hello}">
+    Podaj imie: <input type="text" name="nameParam">
+    <input type="submit" value="Wyślij">
+</form>
+
+<h2 th:text="${date}">2019</h2>
+
+<th:block th:replace="~{includes/stylesAndScripts :: end_of_page}"></th:block>
+</body>
+</html>

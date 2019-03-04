@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:each="post : ${posts}">
+    <h2><a th:text="${post.title}" th:href="@{/post/{name},{qwe}(qwe=${post.id},name=${post.title})}">Tytuł posta</a></h2>
+    <div><a th:text="${post.title}" th:href="@{/post(postId=${post.id})}">Tytuł posta</a></div>
+    <span th:text="${#temporals.format(post.added, 'yyyy-MM-dd HH:mm')}">2019-03-02 11:07:10</span>
+</div>
+
+</body>
+</html>
