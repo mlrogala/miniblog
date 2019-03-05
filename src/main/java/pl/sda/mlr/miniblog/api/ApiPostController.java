@@ -34,8 +34,8 @@ public class ApiPostController {
 
     @GetMapping("/post/{id}")
     public ResponseEntity<Post> getPostDetails(@PathVariable String id){
-        Optional<Post> postOptional= postService.getSinglePost(Long.valueOf(id));
-            return ResponseEntity.of(postOptional);
+        Post post= postService.getSinglePost(Long.valueOf(id)).get();
+            return ResponseEntity.ok(post);
     }
 
 }
