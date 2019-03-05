@@ -3,8 +3,10 @@ package pl.sda.mlr.miniblog.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.mlr.miniblog.entity.Role;
 import pl.sda.mlr.miniblog.entity.User;
+import pl.sda.mlr.miniblog.form.UserEditForm;
 import pl.sda.mlr.miniblog.form.UserRegisterForm;
 import pl.sda.mlr.miniblog.repository.PostRepository;
 import pl.sda.mlr.miniblog.repository.RoleRepository;
@@ -12,6 +14,7 @@ import pl.sda.mlr.miniblog.repository.UserRepository;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -21,6 +24,7 @@ public class UserService {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private RoleRepository roleRepository;
+    private UserEditForm userEditForm;
 
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
@@ -28,8 +32,44 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
     }
+/*
+    public void editUser(UserEditForm userEditForm, String userId) {
+        User user = new User();
+        Optional<User> userOptional = userRepository.findById(Long.valueOf(userId));
+        User userFromDatabase = userOptional.get();
 
-    public void registerUser(UserRegisterForm userRegisterForm){
+        user.setId(userFromDatabase.getId());
+        user.setRoles(userFromDatabase.getRoles());
+
+        if (userEditForm.getFirstName() != null) {
+            user.setFirstName(userEditForm.getFirstName());
+        } else{
+            user.setFirstName(userFromDatabase.getFirstName());
+        }
+
+        if (userEditForm.getLastName() != null) {
+            user.setLastName(userEditForm.getLastName());
+        } else{
+            user.setLastName(userFromDatabase.getLastName());
+        }
+
+        if (userEditForm.getEmail() != null) {
+            user.setEmail(userEditForm.getEmail());
+        } else{
+            user.setEmail(userFromDatabase.getEmail());
+        }
+
+        if (userEditForm.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(userEditForm.getPassword()));
+        } else{
+            user.setPassword(passwordEncoder.encode(userFromDatabase.getPassword()));
+        }
+
+        userRepository.save(user);
+    }
+    */
+
+    public void registerUser(UserRegisterForm userRegisterForm) {
         User user = new User();
         user.setEmail(userRegisterForm.getEmail());
         user.setFirstName(userRegisterForm.getFirstName());
@@ -59,8 +99,21 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Optional<User> getSingleUser(Long userId) {
+        return userRepository.findById(userId);
+    }
 
+    @Transactional
+    public void changeFirstName(String userId, String firstName) {
+        Long userIdLong = Long.valueOf(userId);
+        userRepository.updateFirstName(firstName, userIdLong);
+    }
 
+    @Transactional
+    public void changeLastName(String userId, String lastName) {
+        Long userIdLong = Long.valueOf(userId);
+        userRepository.updateLastName(lastName, userIdLong);
+    }
 }
 
 

@@ -5,12 +5,24 @@
     <title>Title</title>
 </head>
 <body>
-<div th:each="user : ${users}">
-    <div th:text="${user.id}">Id użytkownika</div>
-    <div th:text="${user.firstName}">Imię użytkownika</div>
-    <div th:text="${user.lastName}">Nazwisko użytkownika</div>
-    <div th:text="${user.email}">Email użytkownika</div>
-    <br>
-</div>
+<table>
+    <tr>
+        <th>id</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>email</th>
+        <th>role</th>
+    </tr>
+    <tr th:each="user : ${users}">
+    <th><a th:text="${user.id}" th:href="@{/user/{userId}(userId=${user.id})}"></a></th>
+        <th th:text="${user.firstName}"></th>
+        <th th:text="${user.lastName}"></th>
+        <th th:text="${user.email}"></th>
+        <th th:text="${user.getRoles()}"></th>
+    </tr>
+</table>
+
+<!--a th:text="${post.title}" th:href="@{/post/{name},{qwe}(qwe=${post.id},name=${post.title})}">Tytuł posta</a>-->
+
 </body>
 </html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Edytuj imię</h2>
+
+<form method="post" th:action="@{/user/{userId}/editFirstName}">
+    <input type="text" name="userId" value="id użytkownika">
+    <input type="text" name="firstName" value="Nowe Imię">
+    <br><input type="submit" value="Zapisz">
+</form>
+
+</body>
+</html>

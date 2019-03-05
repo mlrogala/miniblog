@@ -2,6 +2,7 @@ package pl.sda.mlr.miniblog.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+
 public class User {
 
     @Id

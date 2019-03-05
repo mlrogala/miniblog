@@ -3,6 +3,7 @@ package pl.sda.mlr.miniblog.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +23,10 @@ public class Role {
 
     public Role(String roleName) {
         this.roleName = roleName;
+    }
+
+    @Override
+    public String toString() {
+        return roleName + ", ";
     }
 }

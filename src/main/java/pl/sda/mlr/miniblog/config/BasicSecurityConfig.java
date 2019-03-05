@@ -26,7 +26,9 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/post/add").hasAnyAuthority("ROLE_ADMIN")
-//                .antMatchers("/users").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/users").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/user/{userId}/editFirstName").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/user/{userId}/editLastName").hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers("/post/*/comment/add").hasAnyRole("USER", "ADMIN")
                 .anyRequest().permitAll()
                 .and()
@@ -52,7 +54,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("SELECT u.email, r.role_name " +
                         "FROM user u " +
                         "JOIN user_role ur ON u.id = ur.user_id " +
-                        "JOIN role r ON ur.role_id = r.id " +
+                        "JOIN role r ON ur.roles_id = r.id " +
                         "WHERE u.email = ?")
                 .passwordEncoder(passwordEncoder)
         ;

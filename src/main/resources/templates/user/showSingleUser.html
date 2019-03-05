@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/custom.css}">
+</head>
+<h3 th:text="${user.id}">Id użytkownika</h3>
+<h3><a th:text="${user.firstName}" th:href="@{/user/{userId}/editFirstName(userId=${user.id})}">Imię użytkownika</a></h3>
+<h3><a th:text="${user.lastName}" th:href="@{/user/{userId}/editLastName(userId=${user.id})}">Nazwisko użytkownika</a></h3>
+<h3 th:text="${user.email}">email</h3>
+<h3 th:text="${user.roles}">role</h3>
+<br>
+</body>
+</html>
